@@ -1,0 +1,56 @@
+-- For Seeding (Manually executed in h2 console)
+
+DROP TABLE IF EXISTS items;
+
+CREATE TABLE items (
+ id int AUTO_INCREMENT PRIMARY KEY,
+ name varchar(255) NOT NULL,
+ price int NOT NULL
+);
+
+DROP TABLE IF EXISTS orders;
+
+CREATE TABLE orders (
+ order_no varchar(255) PRIMARY KEY
+);
+
+DROP TABLE IF EXISTS order_details;
+
+CREATE TABLE order_details (
+ order_no varchar(255),
+ item_id int,
+ qty int NOT NULL,
+ PRIMARY KEY (order_no, item_id),
+ FOREIGN KEY fk_order_no_orders (order_no) REFERENCES orders(order_no),
+ FOREIGN KEY fk_item_id_items (item_id) REFERENCES items(id)
+);
+
+-- items
+INSERT INTO items(name, price) VALUES ('Pen', 5);
+INSERT INTO items(name, price) VALUES ('Book', 10);
+INSERT INTO items(name, price) VALUES ('Bag', 30);
+INSERT INTO items(name, price) VALUES ('Pencil', 3);
+INSERT INTO items(name, price) VALUES ('Shoe', 45);
+INSERT INTO items(name, price) VALUES ('Box', 5);
+INSERT INTO items(name, price) VALUES ('Cap', 25);
+
+-- orders
+INSERT INTO orders(order_no) VALUES ('O1');
+INSERT INTO orders(order_no) VALUES ('O2');
+INSERT INTO orders(order_no) VALUES ('O3');
+
+--order_details
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O1', 1, 2);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O2', 2, 4);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O1', 7, 5);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 7, 12);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 4, 3);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 3, 1);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O2', 5, 7);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 1, 1);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O2', 4, 12);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O1', 6, 14);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 2, 4);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 5, 5);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O2', 7, 2);
+INSERT INTO order_details(order_no, item_id, qty) VALUES('O3', 6, 5);
